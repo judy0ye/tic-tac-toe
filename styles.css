@@ -1,0 +1,17 @@
+body {
+    display:flex
+}
+
+.player-one, .player-two {
+    border: 1px solid black;
+    width: 25vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.gameboard {
+    width: 50vw;
+    height: 100vh;
+}
