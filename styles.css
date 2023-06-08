@@ -82,3 +82,9 @@ body::before {
 .box {
     border: 1px solid black
 }
+
+.player-emojis {
+    font-size: 4.5rem;
+    display: flex;
+    justify-content: center;
+}
