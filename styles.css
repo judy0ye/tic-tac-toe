@@ -25,13 +25,17 @@ body::before {
     opacity: .55;
 }
 .player-one, .player-two {
-    border: 2px solid white;
+    /* border: 2px solid white; */
     width: 25vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    /* justify-content: space-around; */
+    flex-direction: column;
+    margin-top: 3em;
     font-family: 'Poppins', sans-serif;
 }
+
+
 
 .play-section {
     width: 50vw;
@@ -39,15 +43,22 @@ body::before {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    border-left: 0.3em solid rgb(123, 116, 116);
+    border-right: 0.3em solid rgb(123, 116, 116)
 }
 
-.play-section-header {
+.play-section-header, 
+.wins,
+.player-header {
     display: flex;
     justify-content: space-around;
-    font-size: 2rem;
-    color:ghostwhite;   
+    font-size: 2.5rem;
+    /* color:ghostwhite;    */
 }
 
+.player-header {
+    font-size: 5rem
+}
 .boardgrid {
     /*
     grid-template-columns: 10vw 10vw 10vw;
