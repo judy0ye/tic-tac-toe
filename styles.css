@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;  
@@ -34,8 +35,6 @@ body::before {
     margin-top: 3em;
     font-family: 'Poppins', sans-serif;
 }
-
-
 
 .play-section {
     width: 50vw;
@@ -79,8 +78,20 @@ body::before {
     /* margin-top: 25vh; */
 }
 
-.box {
-    border: 1px solid black
+/* .box {
+    border: 1px solid black;   
+} */
+
+
+     
+.middle-col {
+    border-left: 2px solid black;
+    border-right: 2px solid black 
+}
+
+.middle-row {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black 
 }
 
 .player-emojis {
