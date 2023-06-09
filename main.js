@@ -2,6 +2,7 @@
 var allPlayers = [];
 var playerOne;
 var playerTwo;
+var currentPlayer;
 
 // querySelectors
 // boxOne = document.querySelector('#one')
@@ -15,13 +16,7 @@ boardHeader = document.querySelector('.play-section-header')
 // boxOne.addEventListener('click', addSymbol)
 // boxTwo.addEventListener('click', addSymbol)
 // boxThree.addEventListener('click', addSymbol)
-window.addEventListener('load', displayPlayer)
-
-// for (var i = 0; i < boxes.length; i++) {
-//   boxes[i].addEventListener("click", function (e) {
-//     addSymbol(e);
-//   });
-// }
+window.addEventListener('load', startGame)
 
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('click', function (e) {
@@ -51,75 +46,74 @@ function storePlayerInfo(id, token) {
   };
 }
 
-// function makePlayer() {
-//   playerOne = storePlayerInfo(1, '🥔')
-//   playerTwo = storePlayerInfo(2, '🍟')
+function startGame() {
+  createPlayer();
+  currentPlayer = playerOne
+  displayPlayer(); 
+}
 
-//   allPlayers.push(playerOne)
-//   allPlayers.push(playerTwo)
-  
-//   togglePlayer()
-// }
-// //console.log(allPlayers[0])
-
-function displayPlayer() {
+// updates Data Model:
+function createPlayer() {
   playerOne = storePlayerInfo(1, '🥔')
   playerTwo = storePlayerInfo(2, '🍟')
 
   allPlayers.push(playerOne)
   allPlayers.push(playerTwo)
-
-  // if (playerTurn === playerOne) {
-    // boardHeader.innerHTML += `Hey ${playerOne.token}, it's your turn`
-  // } else {
-  //     boardHeader.innerHTML += `Hey ${playerTwo.token}, it's your turn`
-  //   }
-  togglePlayer()  
 }
-
-// function togglePlayer() {
-//   if (boardHeader.classList.contains('player-emojis') {
-//     boardHeader.classList.add('hidden');
-//     boardHeader.classList.remove('hidden')
-
-//   })
-// }
 
 
 // how do I do 'click' on box then togglePlayer?
   // eventListener on boxes, click, hide player[i].isPlayerTurn or remove
   // make isPlayerTurn false
-function togglePlayer() {
+function displayPlayer() {
+  console.log('showing player')
   //check which player goes
-  if (playerOne.isPlayerTurn) {
-    boardHeader.innerHTML = `Hey ${playerOne.token}, it's your turn!`
+  if (currentPlayer === playerOne) {
+    boardHeader.innerHTML = `<h3 class="player-one-head">Hey ${playerOne.token}, it's your turn!</h3>`
     // after click, go to other player
-    !playerOne.isPlayerTurn
+    //boardHeader.firstElementChild.classList.remove('player-two-head')
+  } 
+  // how to update DOM?
+  if (currentPlayer === playerTwo) {
+    boardHeader.innerHTML = `<h3 class="player-two-head">Hey ${playerTwo.token}, it's your turn!<h3>`
   }
-  if (playerTwo.isPlayerTurn) {
-    boardHeader.innerHTML = `Hey ${playerTwo.token}, it's your turn!`
-  }
+  //togglePlayer()
+  // can't use keepTrack it throws an undefined for target
 }
 
-// function toggleClass(Object.keys, className) {
-//   element.classList.toggle(className)
+// function togglePlayer() {
+//   // for (var i = 0; i < allPlayers.length; i++) {
+//   //   // if currentPlayer clicked make isPlayerTurn false
+//   //   allPlayers[i].isPlayerTurn = !allPlayers[i].isPlayerTurn
+//   // }
+//   playerOne.isPlayerTurn = !playerOne.isPlayerTurn
 // }
-// toggleClass(player[i].isPlayerTurn, )
+
+function keepTrack(e) {
+  if (currentPlayer === playerOne) {
+    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
+    playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')));
+    // change player
+    //playerOne.isPlayerTurn = false
+    // //console.log('whose turn:', !playerOne.isPlayerTurn)
+    //playerTwo.isPlayerTurn = true
+    // //console.log('P2:', playerTwo.isPlayerTurn)
+  }
+  if (currentPlayer === playerTwo) {
+    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>`;
+    playerTwo.boxTargets.push(parseInt(e.target.getAttribute('id')));
+    // playerTwo.isPlayerTurn = false
+    // playerOne.isPlayerTurn = true
+  }
+  togglePlayer()
+}
 
 // make Toggle do: isPlayerTurn = !isPlayerTurn
 // isPlayerTurn ? true : !isPlayerTurn
-
-function keepTrack(e) {
-  if (playerOne.isPlayerTurn) {
-    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
-    playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')));
-  } else {
-    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>`;
-    playerTwo.boxTargets.push(parseInt(e.target.getAttribute('id')));
-  }
-console.log('hello potato')
+function togglePlayer() {
+  //if currentPlayer is playerOne, make it playerTwo
+  currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
 }
-
 
 function increaseWins() {
   for (var i = 0; i < allPlayers.length; i++) {
@@ -129,13 +123,5 @@ function increaseWins() {
 // update DOM
 
 
-// function addSymbol(e) {
-//   // for (var i = 0; i < boxes.length; i++){
-//   //     if (e.target.classList.contains('box')) {
-//   console.log(e.target);
-//   e.target.innerHTML += `<div class="player-emojis">🥔</div>`;
-//   //         }
-//   //     }
-// }
 
 
