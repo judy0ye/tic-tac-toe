@@ -24,9 +24,9 @@ window.addEventListener('load', displayPlayer)
 // }
 
 for (var i = 0; i < boxes.length; i++) {
-  boxes[i].addEventListener("click", function (e) {
+  boxes[i].addEventListener('click', function (e) {
     keepTrack(e);
-  });
+  }, {once: true});
 }
 
 // idk what these are
@@ -87,13 +87,27 @@ function displayPlayer() {
 
 
 // how do I do 'click' on box then togglePlayer?
+  // eventListener on boxes, click, hide player[i].isPlayerTurn or remove
+  // make isPlayerTurn false
 function togglePlayer() {
+  //check which player goes
   if (playerOne.isPlayerTurn) {
     boardHeader.innerHTML = `Hey ${playerOne.token}, it's your turn!`
-  } else {
+    // after click, go to other player
+    !playerOne.isPlayerTurn
+  }
+  if (playerTwo.isPlayerTurn) {
     boardHeader.innerHTML = `Hey ${playerTwo.token}, it's your turn!`
   }
 }
+
+// function toggleClass(Object.keys, className) {
+//   element.classList.toggle(className)
+// }
+// toggleClass(player[i].isPlayerTurn, )
+
+// make Toggle do: isPlayerTurn = !isPlayerTurn
+// isPlayerTurn ? true : !isPlayerTurn
 
 function keepTrack(e) {
   if (playerOne.isPlayerTurn) {
