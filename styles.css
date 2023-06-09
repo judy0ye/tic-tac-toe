@@ -58,7 +58,7 @@ body::before {
 .player-header {
     font-size: 5rem
 }
-.boardgrid {
+.grid-board {
     /*
     grid-template-columns: 10vw 10vw 10vw;
     grid-template-rows: 15vh 15vh 15vh;
@@ -94,7 +94,8 @@ body::before {
     border-bottom: 2px solid black 
 }
 
-.player-emojis {
+.player-one-emoji,
+.player-two-emoji {
     font-size: 4.5rem;
     display: flex;
     justify-content: center;

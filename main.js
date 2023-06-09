@@ -17,11 +17,11 @@ boardHeader = document.querySelector('.play-section-header')
 // boxThree.addEventListener('click', addSymbol)
 window.addEventListener('load', displayPlayer)
 
-for (var i = 0; i < boxes.length; i++) {
-  boxes[i].addEventListener("click", function (e) {
-    addSymbol(e);
-  });
-}
+// for (var i = 0; i < boxes.length; i++) {
+//   boxes[i].addEventListener("click", function (e) {
+//     addSymbol(e);
+//   });
+// }
 
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener("click", function (e) {
@@ -29,17 +29,38 @@ for (var i = 0; i < boxes.length; i++) {
   });
 }
 
+// idk what these are
+  // after page shows a payer won:
+// setTimeout(doSomething, 5000)
+  //doSomething= after potato or fries win
 
+// function doSomething() {
+//   if (boardHeader.innerHTML.includes('🥔')) {
+
+//   }
+// }
 
 // functions
 function storePlayerInfo(id, token) {
   return {
     id: id,
-    token: token,
+    token: token, 
+    isPlayerTurn: true,
     wins: 0,
     boxTargets: []
   };
 }
+
+// function makePlayer() {
+//   playerOne = storePlayerInfo(1, '🥔')
+//   playerTwo = storePlayerInfo(2, '🍟')
+
+//   allPlayers.push(playerOne)
+//   allPlayers.push(playerTwo)
+  
+//   togglePlayer()
+// }
+// //console.log(allPlayers[0])
 
 function displayPlayer() {
   playerOne = storePlayerInfo(1, '🥔')
@@ -48,9 +69,43 @@ function displayPlayer() {
   allPlayers.push(playerOne)
   allPlayers.push(playerTwo)
 
-  boardHeader.innerHTML += `Hey ${playerOne.token}, it's your turn`
-  boardHeader.innerHTML += `Hey ${playerTwo.token}, it's your turn`
+  // if (playerTurn === playerOne) {
+    // boardHeader.innerHTML += `Hey ${playerOne.token}, it's your turn`
+  // } else {
+  //     boardHeader.innerHTML += `Hey ${playerTwo.token}, it's your turn`
+  //   }
+  togglePlayer()  
 }
+
+// function togglePlayer() {
+//   if (boardHeader.classList.contains('player-emojis') {
+//     boardHeader.classList.add('hidden');
+//     boardHeader.classList.remove('hidden')
+
+//   })
+// }
+
+
+// how do I do 'click' on box then togglePlayer?
+function togglePlayer() {
+  if (playerOne.isPlayerTurn) {
+    boardHeader.innerHTML = `Hey ${playerOne.token}, it's your turn!`
+  } else {
+    boardHeader.innerHTML = `Hey ${playerTwo.token}, it's your turn!`
+  }
+}
+
+function keepTrack(e) {
+  if (playerOne.isPlayerTurn) {
+    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
+    playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')));
+  } else {
+    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>`;
+    playerTwo.boxTargets.push(parseInt(e.target.getAttribute('id')));
+  }
+console.log('hello potato')
+}
+
 
 function increaseWins() {
   for (var i = 0; i < allPlayers.length; i++) {
@@ -60,19 +115,13 @@ function increaseWins() {
 // update DOM
 
 
-function addSymbol(e) {
-  // for (var i = 0; i < boxes.length; i++){
-  //     if (e.target.classList.contains('box')) {
-  console.log(e.target);
-  e.target.innerHTML += `<div class="player-emojis">🥔</div>`;
-  //         }
-  //     }
-}
-
-function keepTrack(e) {
-  playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')))
-
-  console.log('hello potato')
-}
+// function addSymbol(e) {
+//   // for (var i = 0; i < boxes.length; i++){
+//   //     if (e.target.classList.contains('box')) {
+//   console.log(e.target);
+//   e.target.innerHTML += `<div class="player-emojis">🥔</div>`;
+//   //         }
+//   //     }
+// }
 
 
