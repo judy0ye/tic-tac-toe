@@ -1,13 +1,15 @@
 // data model
-var players = [playerOne, playerTwo];
+var allPlayers = [];
 var playerOne;
 var playerTwo;
 
 // querySelectors
-// boxOne = document.querySelector('#one')
-// boxTwo = document.querySelector('#two')
-// boxThree = document.querySelector('#three')
+boxOne = document.querySelector('#one')
+boxTwo = document.querySelector('#two')
+boxThree = document.querySelector('#three')
+boxFour = document.querySelector('#four')
 boxes = document.querySelectorAll(".box");
+boardHeader = document.querySelector('.play-section-header')
 
 // eventListeners
 // boxOne.addEventListener('click', addSymbol)
@@ -19,7 +21,7 @@ for (var i = 0; i < boxes.length; i++) {
   });
 }
 
-// var boxes = [boxOne, boxTwo, boxThree]
+window.addEventListener('load', displayPlayer)
 
 // functions
 function storePlayerInfo(id, token) {
@@ -30,11 +32,24 @@ function storePlayerInfo(id, token) {
   };
 }
 
+function displayPlayer() {
+  playerOne = storePlayerInfo(1, '🥔')
+  playerTwo = storePlayerInfo(2, '🍟')
+
+  allPlayers.push(playerOne)
+  allPlayers.push(playerTwo)
+
+  boardHeader.innerHTML += `Hey ${playerOne.token}, it's your turn`
+  boardHeader.innerHTML += `Hey ${playerTwo.token}, it's your turn`
+}
+
 function increaseWins() {
   for (var i = 0; i < players.length; i++) {
     players[i].wins++;
   }
 }
+// update DOM
+
 
 function addSymbol(e) {
   // for (var i = 0; i < boxes.length; i++){
