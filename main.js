@@ -60,6 +60,7 @@ function storePlayerInfo(id, token) {
     token: token, 
     // isPlayerTurn: true,
     wins: 0,
+    winTracker: 0,
     boxTargets: []
   };
 }
@@ -138,28 +139,74 @@ function placeMove(e) {
   // }
   currentPlayer.boxTargets.push(parseInt(e.target.getAttribute('id')));
   
-  togglePlayer()  
+  togglePlayer()
+  checkWins()  
 }
+
+// function checkWins() {
+//   for (var i =0; i < gameBoard.length; i++) {
+//     if (gameBoard[i] === playerOne.token && gameBoard[i+1] === playerOne.token
+//       && gameBoard[i+2] === playerOne.token) {
+       
+//         playerOne.wins++
+      
+//     }  
+//   }  
+// }
 
 function checkWins() {
-  for (var i =0; i < gameBoard.length; i++) {
-    if (gameBoard[i] === playerOne.token && gameBoard[i+1] === playerOne.token
-      && gameBoard[i+2] === playerOne.token) {
-       
-        playerOne.wins++
+  for (var i = 0; i < gameBoard.length; i++) {
+    if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 3) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 6) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+4]) && (gameBoard[i+4] === gameBoard[i+8])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+2]) && (gameBoard[i+2] === gameBoard[i+4])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 1) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
+      console.log('yaaaa')
+      increaseWins()
+    }
+    // if ((gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
+    //   console.log('yaaaa')
+    //   increaseWins()
+    // }
+    // if ((gameBoard[i] === gameBoard[i+1] && gameBoard[i] !== '') && (gameBoard[i+1] === gameBoard[i+2])) {
       
-    }  
-  }  
-  
+    //   console.log('yaaaa')
+    
+    
+    // }
+  }
 }
-
 function increaseWins() {
   // for (var i = 0; i < allPlayers.length; i++) {
   //   allPlayers[i].wins++;
   // }
-  playerOne.wins++
-  //currentPlayer.wins++
-  return playerOne
+  //playerOne.wins++
+  currentPlayer.wins++
+  //return playerOne
 }
 // update DOM
 
