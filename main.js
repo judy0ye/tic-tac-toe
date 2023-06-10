@@ -73,6 +73,10 @@ function startGame() {
   // checkWins();
 }
 
+function stopGame() {
+  // stop toggle player
+}
+
 // updates Data Model:
 function createPlayer() {
   playerOne = storePlayerInfo(1, '🥔')
@@ -139,8 +143,8 @@ function placeMove(e) {
   // }
   currentPlayer.boxTargets.push(parseInt(e.target.getAttribute('id')));
   
-  togglePlayer()
   checkWins()  
+  togglePlayer() 
 }
 
 // function checkWins() {
