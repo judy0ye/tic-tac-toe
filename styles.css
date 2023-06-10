@@ -25,6 +25,7 @@ body::before {
     z-index: -1;
     opacity: .55;
 }
+
 .player-one, .player-two {
     /* border: 2px solid white; */
     width: 25vw;
@@ -55,9 +56,12 @@ body::before {
     /* color:ghostwhite;    */
 }
 
+/* header */
 .player-header {
     font-size: 5rem
 }
+
+/* tic tac toe board */
 .grid-board {
     /*
     grid-template-columns: 10vw 10vw 10vw;
@@ -78,11 +82,9 @@ body::before {
     /* margin-top: 25vh; */
 }
 
-/* .box {
+.box {
     border: 1px solid black;   
-} */
-
-
+}
      
 .middle-col {
     border-left: 2px solid black;
