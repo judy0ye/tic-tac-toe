@@ -3,6 +3,7 @@ var allPlayers = [];
 var playerOne;
 var playerTwo;
 var currentPlayer;
+var gameBoard = ['', '', '', '', '', '', '', '', '']
 
 var winningCombos = [
   [1, 2, 3], 
@@ -32,7 +33,7 @@ window.addEventListener('load', startGame)
 
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('click', function (e) {
-    keepTrack(e);
+    placeMove(e);
   }, {once: true});
 }
 
@@ -61,8 +62,8 @@ function storePlayerInfo(id, token) {
 
 function startGame() {
   createPlayer();
-  displayBoard();
   currentPlayer = playerOne
+  // displayBoard();
   displayPlayer(); 
   // checkWins();
 }
@@ -84,17 +85,17 @@ function displayPlayer() {
   boardHeader.innerHTML = `<h3 class="player-one-head">Hey ${currentPlayer.token}, it's your turn!</h3>`
 }
 
-function keepTrack(e) {
-  if (currentPlayer === playerOne) {
-    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
-    playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')));
-  }
-  if (currentPlayer === playerTwo) {
-    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>`;
-    playerTwo.boxTargets.push(parseInt(e.target.getAttribute('id')));
-  }
-  togglePlayer()
-}
+// function keepTrack(e) {
+//   if (currentPlayer === playerOne) {
+//     e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
+//     playerOne.boxTargets.push(parseInt(e.target.getAttribute('id')));
+//   }
+//   if (currentPlayer === playerTwo) {
+//     e.target.innerHTML += `<div class="player-two-emoji">🍟</div>`;
+//     playerTwo.boxTargets.push(parseInt(e.target.getAttribute('id')));
+//   }
+//   togglePlayer()
+// }
 
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
@@ -114,7 +115,24 @@ function togglePlayer() {
 //   }
 // }
 
-
+function placeMove(e) {
+  var gameBoardIndex = parseInt(e.target.getAttribute('id'))
+  if (gameBoard[gameBoardIndex] === '') {
+    gameBoard[gameBoardIndex]= currentPlayer.token
+    // parseInt(e.target.getAttribute('id'))
+  } else {
+    return 
+  }
+  if (currentPlayer === playerOne) {
+    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>` 
+  }
+  if (currentPlayer === playerTwo) {
+    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>` 
+  }
+  currentPlayer.boxTargets.push(parseInt(e.target.getAttribute('id')));
+  
+  togglePlayer()  
+}
 
 function increaseWins() {
   for (var i = 0; i < allPlayers.length; i++) {
