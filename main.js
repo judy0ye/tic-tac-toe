@@ -3,7 +3,11 @@ var allPlayers = [];
 var playerOne;
 var playerTwo;
 var currentPlayer;
-var gameBoard = ['', '', '', '', '', '', '', '', '']
+var gameBoard = 
+['', '', '', 
+'', '', '', 
+'', '', '']
+
 
 var winningCombos = [
   [1, 2, 3], 
@@ -82,7 +86,7 @@ function createPlayer() {
   // eventListener on boxes, click, hide player[i].isPlayerTurn or remove
   // make isPlayerTurn false
 function displayPlayer() {
-  boardHeader.innerHTML = `<h3 class="player-one-head">Hey ${currentPlayer.token}, it's your turn!</h3>`
+  boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`
 }
 
 // function keepTrack(e) {
@@ -123,22 +127,39 @@ function placeMove(e) {
   } else {
     return 
   }
-  if (currentPlayer === playerOne) {
-    e.target.innerHTML += `<div class="player-one-emoji">🥔</div>` 
-  }
-  if (currentPlayer === playerTwo) {
-    e.target.innerHTML += `<div class="player-two-emoji">🍟</div>` 
-  }
+
+  e.target.innerHTML += `<div class="player-emoji">${currentPlayer.token}</div>` 
+
+  // if (currentPlayer === playerOne) {
+  //   e.target.innerHTML += `<div class="player-one-emoji">🥔</div>` 
+  // }
+  // if (currentPlayer === playerTwo) {
+  //   e.target.innerHTML += `<div class="player-two-emoji">🍟</div>` 
+  // }
   currentPlayer.boxTargets.push(parseInt(e.target.getAttribute('id')));
   
   togglePlayer()  
 }
 
+function checkWins() {
+  for (var i =0; i < gameBoard.length; i++) {
+    if (gameBoard[i] === playerOne.token && gameBoard[i+1] === playerOne.token
+      && gameBoard[i+2] === playerOne.token) {
+       
+        playerOne.wins++
+      
+    }  
+  }  
+  
+}
+
 function increaseWins() {
-  for (var i = 0; i < allPlayers.length; i++) {
-    allPlayers[i].wins++;
-  }
-  storePlayerInfo()
+  // for (var i = 0; i < allPlayers.length; i++) {
+  //   allPlayers[i].wins++;
+  // }
+  playerOne.wins++
+  //currentPlayer.wins++
+  return playerOne
 }
 // update DOM
 

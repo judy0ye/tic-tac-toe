@@ -96,8 +96,9 @@ body::before {
     border-bottom: 2px solid black 
 }
 
-.player-one-emoji,
-.player-two-emoji {
+/* .player-one-emoji,
+.player-two-emoji  */
+.player-emoji {
     font-size: 4.5rem;
     display: flex;
     justify-content: center;
