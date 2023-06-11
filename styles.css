@@ -98,8 +98,13 @@ body::before {
 
 /* .player-one-emoji,
 .player-two-emoji  */
-.player-emoji {
+.player-emoji,
+.wins {
     font-size: 4.5rem;
     display: flex;
     justify-content: center;
+}
+
+.wins {
+    font-size: 2.5rem
 }
