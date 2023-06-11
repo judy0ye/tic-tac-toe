@@ -21,13 +21,11 @@ var winningCombos = [
 ]
 
 // querySelectors
-// boxOne = document.querySelector('#one')
-// boxTwo = document.querySelector('#two')
-// boxThree = document.querySelector('#three')
-// boxFour = document.querySelector('#four')
-boxes = document.querySelectorAll(".box");
+boxes = document.querySelectorAll(".box");;
 boardHeader = document.querySelector('.play-section-header')
-gridBoard = document.querySelector('.grid-board')
+gridBoard = document.querySelector('.grid-board');
+playerOneWins = document.querySelector('.player-one-wins')
+playerTwoWins = document.querySelector('.player-two-wins')
 
 // eventListeners
 // boxOne.addEventListener('click', addSymbol)
@@ -73,9 +71,6 @@ function startGame() {
   // checkWins();
 }
 
-function stopGame() {
-  // stop toggle player
-}
 
 // updates Data Model:
 function createPlayer() {
@@ -91,7 +86,9 @@ function createPlayer() {
   // eventListener on boxes, click, hide player[i].isPlayerTurn or remove
   // make isPlayerTurn false
 function displayPlayer() {
-  boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`
+  boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`;
+  playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`;
+  playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
 }
 
 function clearPlayerHeader() {
@@ -150,8 +147,7 @@ function placeMove(e) {
   if (!currentPlayer.winIncreased) {
     console.log(currentPlayer.winIncreased)
     togglePlayer()
-  }
-  
+  } 
 }
 
 // function checkWins() {
@@ -169,50 +165,42 @@ function checkWins() {
   for (var i = 0; i < gameBoard.length; i++) {
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 3) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 6) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+4]) && (gameBoard[i+4] === gameBoard[i+8])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+2]) && (gameBoard[i+2] === gameBoard[i+4])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 1) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
       increaseWins();
-      currentPlayer.winIncreased = true
-      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      announceWin()
       return
     }
     // if ((gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
@@ -233,10 +221,17 @@ function increaseWins() {
   // }
   //playerOne.wins++
   currentPlayer.wins++
+  playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`
+  playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
   //return playerOne
 }
 // update DOM
 
+function announceWin(){
+  currentPlayer.winIncreased = true
+  boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+}
 
-
-
+function stopGame() {
+  // if currentPlayer.winIncrested is true, disable click
+}
