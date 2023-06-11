@@ -68,6 +68,7 @@ function createPlayer() {
 }
 
 function displayPlayer() {
+  
   boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`;
   playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`;
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
@@ -169,8 +170,11 @@ function disableClicks() {
 }
 
 function stopGame() {
-  gamePlaySection.classList.add('obscure')
-  setTimeout(reset, 1000)
+  setTimeout (function() {
+    gamePlaySection.classList.add('obscure')
+  setTimeout(reset, 1500)
+  }, 2500)
+  
 }
 
 function reset() {
@@ -178,6 +182,6 @@ function reset() {
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].innerHTML = ''
   }
-  //gridBoard.innerHTML = ''
+  displayPlayer()
 }
 
