@@ -113,3 +113,8 @@ body::before {
     pointer-events: none;
     /* cursor: not-allowed; */
 }
+
+.obscure {
+    /* display: none; */
+    opacity: .25;
+}

@@ -3,14 +3,12 @@ var allPlayers = [];
 var playerOne;
 var playerTwo;
 var currentPlayer;
-var gameBoard = 
-['', '', '', 
-'', '', '', 
-'', '', '']
+var gameBoard = ['', '', '', '', '', '', '', '', '']
 
 // querySelectors
 boxes = document.querySelectorAll(".box");;
 boardHeader = document.querySelector('.play-section-header')
+gamePlaySection = document.querySelector('.play-section')
 gridBoard = document.querySelector('.grid-board');
 playerOneWins = document.querySelector('.player-one-wins')
 playerTwoWins = document.querySelector('.player-two-wins')
@@ -75,9 +73,9 @@ function displayPlayer() {
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
 }
 
-function clearPlayerHeader() {
-  boardHeader.innerHTML = ''
-}
+// function clearPlayerHeader() {
+//   boardHeader.innerHTML = ''
+// }
 
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
@@ -107,6 +105,7 @@ function checkWins() {
       increaseWins();
       announceWin();
       disableClicks();
+      stopGame()
       return
     }
     if ((i === 3) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
@@ -168,3 +167,17 @@ function announceWin(){
 function disableClicks() {
   gridBoard.classList.add('disable-click')
 }
+
+function stopGame() {
+  gamePlaySection.classList.add('obscure')
+  setTimeout(reset, 1000)
+}
+
+function reset() {
+  gamePlaySection.classList.remove('obscure')
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].innerHTML = ''
+  }
+  //gridBoard.innerHTML = ''
+}
+
