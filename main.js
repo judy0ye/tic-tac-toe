@@ -60,7 +60,7 @@ function storePlayerInfo(id, token) {
     token: token, 
     // isPlayerTurn: true,
     wins: 0,
-    winTracker: 0,
+    winIncreased: false,
     boxTargets: []
   };
 }
@@ -94,6 +94,9 @@ function displayPlayer() {
   boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`
 }
 
+function clearPlayerHeader() {
+  boardHeader.innerHTML = ''
+}
 // function keepTrack(e) {
 //   if (currentPlayer === playerOne) {
 //     e.target.innerHTML += `<div class="player-one-emoji">🥔</div>`;
@@ -144,7 +147,11 @@ function placeMove(e) {
   currentPlayer.boxTargets.push(parseInt(e.target.getAttribute('id')));
   
   checkWins()  
-  togglePlayer() 
+  if (!currentPlayer.winIncreased) {
+    console.log(currentPlayer.winIncreased)
+    togglePlayer()
+  }
+  
 }
 
 // function checkWins() {
@@ -161,36 +168,52 @@ function placeMove(e) {
 function checkWins() {
   for (var i = 0; i < gameBoard.length; i++) {
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 3) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 6) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+4]) && (gameBoard[i+4] === gameBoard[i+8])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+2]) && (gameBoard[i+2] === gameBoard[i+4])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 1) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      console.log('yaaaa')
-      increaseWins()
+      increaseWins();
+      currentPlayer.winIncreased = true
+      boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, you won!</h3>`
+      return
     }
     // if ((gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
     //   console.log('yaaaa')
