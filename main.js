@@ -59,6 +59,7 @@ function createPlayer() {
 function displayPlayer() {
   if (currentPlayer.winIncreased) {
     togglePlayer()
+    enableClicks()
   }
   boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`;
   playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`;
@@ -160,6 +161,10 @@ function disableClicks() {
   gridBoard.classList.add('disable-click')
 }
 
+function enableClicks() {
+  gridBoard.classList.remove('disable-click')
+}
+
 function stopGame() {
   setTimeout (function() {
     gamePlaySection.classList.add('obscure')
@@ -168,6 +173,7 @@ function stopGame() {
 }
 
 function reset() {
+  gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
   gamePlaySection.classList.remove('obscure')
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].innerHTML = ''
