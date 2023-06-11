@@ -96,9 +96,20 @@ body::before {
     border-bottom: 2px solid black 
 }
 
-.player-one-emoji,
-.player-two-emoji {
+/* .player-one-emoji,
+.player-two-emoji  */
+.player-emoji,
+.wins {
     font-size: 4.5rem;
     display: flex;
     justify-content: center;
+}
+
+.wins {
+    font-size: 2.5rem
+}
+
+.disable-click {
+    pointer-events: none;
+    /* cursor: not-allowed; */
 }
