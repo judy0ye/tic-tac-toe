@@ -19,11 +19,31 @@ playerTwoWins = document.querySelector('.player-two-wins')
 // boxThree.addEventListener('click', addSymbol)
 window.addEventListener('load', startGame)
 
+// for (var i = 0; i < boxes.length; i++) {
+//   boxes[i].addEventListener('click', function (e) {
+//     placeMove(e);
+//   }, {once: true});
+// }
+
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('click', function (e) {
     placeMove(e);
-  }, {once: true});
+  });
 }
+
+// for (var i = 0; i < boxes.length; i++) {
+//   boxes[i].addEventListener('reset', startGame);
+// }
+
+// for (var i = 0; i < boxes.length; i++) {
+//   boxes[i].addEventListener('click', function removeAfterReset(e) {
+//     placeMove(e);
+//     if(currentPlayer.increaseWins) {
+//       reset()
+//       e.target.removeEventListener('click', removeAfterReset)
+//     }
+//   }, {once: true});
+// }
 
 // functions
 function storePlayerInfo(id, token) {
@@ -57,10 +77,6 @@ function createPlayer() {
 }
 
 function displayPlayer() {
-  if (currentPlayer.winIncreased) {
-    togglePlayer()
-    enableClicks()
-  }
   boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`;
   playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`;
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
@@ -162,7 +178,10 @@ function disableClicks() {
 }
 
 function enableClicks() {
-  gridBoard.classList.remove('disable-click')
+  if (currentPlayer.winIncreased) {
+    togglePlayer()
+    gridBoard.classList.remove('disable-click')
+  }
 }
 
 function stopGame() {
@@ -174,10 +193,13 @@ function stopGame() {
 
 function reset() {
   gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
-  gamePlaySection.classList.remove('obscure')
+  
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].innerHTML = ''
   }
-  displayPlayer()
+  gamePlaySection.classList.remove('obscure')
+  currentPlayer.winIncreased = false
+  togglePlayer()
+  gridBoard.classList.remove('disable-click')
 }
 
