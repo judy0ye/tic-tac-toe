@@ -25,17 +25,6 @@ for (var i = 0; i < boxes.length; i++) {
   }, {once: true});
 }
 
-// idk what these are
-  // after page shows a payer won:
-// setTimeout(doSomething, 5000)
-  //doSomething= after potato or fries win
-
-// function doSomething() {
-//   if (boardHeader.innerHTML.includes('🥔')) {
-
-//   }
-// }
-
 // functions
 function storePlayerInfo(id, token) {
   return {
@@ -68,7 +57,9 @@ function createPlayer() {
 }
 
 function displayPlayer() {
-  
+  if (currentPlayer.winIncreased) {
+    togglePlayer()
+  }
   boardHeader.innerHTML = `<h3 class="player-emoji">Hey ${currentPlayer.token}, it's your turn!</h3>`;
   playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`;
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
@@ -174,7 +165,6 @@ function stopGame() {
     gamePlaySection.classList.add('obscure')
   setTimeout(reset, 1500)
   }, 2500)
-  
 }
 
 function reset() {
