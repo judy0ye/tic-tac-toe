@@ -71,7 +71,7 @@ body::before {
     /* border: 1px solid salmon; */
     display: grid;
     grid-template-columns: repeat(3, 15vw);
-    grid-template-rows: repeat(3, 18vh);
+    grid-template-rows: repeat(3, 15vh);
     justify-items: stretch;
     align-items: stretch;
     justify-content: center;
@@ -82,9 +82,13 @@ body::before {
     /* margin-top: 25vh; */
 }
 
-/* .box {
-    border: 1px solid black;   
-} */
+.box {
+    /* border: 1px solid black;    */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
      
 .middle-col {
     border-left: .3em solid black;
@@ -109,8 +113,8 @@ body::before {
 .player-emoji,
 .wins {
     font-size: 4.5rem;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
 }
 
 .wins {
