@@ -46,7 +46,6 @@ function startGame() {
   // checkWins();
 }
 
-
 // updates Data Model:
 function createPlayer() {
   playerOne = storePlayerInfo(1, '🥔', true)
@@ -67,7 +66,7 @@ function togglePlayer() {
   // displayPlayer()
 }
 
-function toggleStartsFirst() {
+function toggleWhoStartsFirst() {
   if (currentPlayer.startsFirst) {
     currentPlayer.startsFirst = false
     togglePlayer()
@@ -79,31 +78,6 @@ function toggleStartsFirst() {
     togglePlayer()
   }
 }
-
-
-// function toggleStartsFirst() {
-//   if (currentPlayer === playerOne && playerOne.startsFirst) {
-//     playerOne.startsFirst = false
-//     playerTwo.startsFirst = true
-//     return
-//   }
-//   if (currentPlayer === playerOne && !playerOne.startsFirst) {
-//     playerOne.startsFirst = true
-//     playerTwo.startsFirst = false
-//     return
-//   }
-//   if (currentPlayer === playerTwo && playerTwo.startsFirst) {
-//     playerOne.startsFirst = true
-//     playerTwo.startsFirst = false
-//     return
-//   }
-//   if (currentPlayer === playerTwo && !playerTwo.startsFirst) {
-//     playerOne.startsFirst = false
-//     playerTwo.startsFirst = true
-//     return
-//   }
-// }
-
 
 function placeMove(e) {
   var gameBoardIndex = parseInt(e.target.getAttribute('id'))
@@ -207,7 +181,7 @@ function reset() {
   }
   gamePlaySection.classList.remove('obscure')
   
-  toggleStartsFirst()
+  toggleWhoStartsFirst()
   displayPlayer() 
   enableClicks()
 }
