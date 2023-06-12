@@ -50,15 +50,25 @@ body::before {
 .play-section-header, 
 .wins,
 .player-header {
+    margin: .6em;
+    text-align: center;
     display: flex;
     justify-content: space-around;
     font-size: 2.5rem;
+    border-radius: .4em;
+    text-shadow: 6px 3px 9px rgb(54 59 71);
+    /* background-color: rgb(109 110 130); */
+    color: antiquewhite;
+    background-image: linear-gradient(to bottom, #778899, #808080);
+    /* background-image: linear-gradient(to bottom, #7A858E, #787E82); */
+    opacity: .9;
     /* color:ghostwhite;    */
 }
 
 /* header */
 .player-header {
-    font-size: 5rem
+    font-size: 4rem;
+    /* margin: 1em; */
 }
 
 /* tic tac toe board */
@@ -112,9 +122,9 @@ body::before {
 .player-two-emoji  */
 .player-emoji,
 .wins {
-    font-size: 4.5rem;
-    /* display: flex;
-    justify-content: center; */
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .wins {
