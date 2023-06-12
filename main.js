@@ -3,57 +3,44 @@ var allPlayers = [];
 var playerOne;
 var playerTwo;
 var currentPlayer;
-var gameBoard = 
-['', '', '', 
-'', '', '', 
-'', '', '']
+var gameBoard = ['', '', '', '', '', '', '', '', '']
+var checkWinsCounter = 0
 
 // querySelectors
 boxes = document.querySelectorAll(".box");;
 boardHeader = document.querySelector('.play-section-header')
+gamePlaySection = document.querySelector('.play-section')
 gridBoard = document.querySelector('.grid-board');
 playerOneWins = document.querySelector('.player-one-wins')
 playerTwoWins = document.querySelector('.player-two-wins')
 
 // eventListeners
-// boxOne.addEventListener('click', addSymbol)
-// boxTwo.addEventListener('click', addSymbol)
-// boxThree.addEventListener('click', addSymbol)
 window.addEventListener('load', startGame)
 
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('click', function (e) {
     placeMove(e);
-  }, {once: true});
+  });
 }
 
-// idk what these are
-  // after page shows a payer won:
-// setTimeout(doSomething, 5000)
-  //doSomething= after potato or fries win
-
-// function doSomething() {
-//   if (boardHeader.innerHTML.includes('🥔')) {
-
-//   }
-// }
-
 // functions
-function storePlayerInfo(id, token) {
+function storePlayerInfo(id, token, startFirst) {
   return {
     id: id,
     token: token, 
-    // isPlayerTurn: true,
+    // isPlayerTurn: true, 
+    startFirst: startFirst || false,
     wins: 0,
     winIncreased: false,
-    disableClick: false,
+    //disableClick: false,
     //boxTargets: []
   };
 }
 
 function startGame() {
   createPlayer();
-  currentPlayer = playerOne
+  currentPlayer = playerOne;
+  // playerOne.startFirst = true;
   // displayBoard();
   displayPlayer(); 
   // checkWins();
@@ -75,10 +62,6 @@ function displayPlayer() {
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
 }
 
-function clearPlayerHeader() {
-  boardHeader.innerHTML = ''
-}
-
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
   displayPlayer()
@@ -88,6 +71,7 @@ function placeMove(e) {
   var gameBoardIndex = parseInt(e.target.getAttribute('id'))
   if (gameBoard[gameBoardIndex] === '') {
     gameBoard[gameBoardIndex]= currentPlayer.token
+    
     // parseInt(e.target.getAttribute('id'))
   } else {
     return 
@@ -95,64 +79,50 @@ function placeMove(e) {
 
   e.target.innerHTML += `<div class="player-emoji">${currentPlayer.token}</div>` 
   
+  checkWinsCounter++
   checkWins()  
-  if (!currentPlayer.winIncreased) {
+  if (!currentPlayer.winIncreased && checkWinsCounter < 9) {
     togglePlayer()
-  } 
+  }
+  checkDraws() 
 }
 
 function checkWins() {
   for (var i = 0; i < gameBoard.length; i++) {
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+     doAfterWin()
     }
     if ((i === 3) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 6) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+1]) && (gameBoard[i+1] === gameBoard[i+2])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+4]) && (gameBoard[i+4] === gameBoard[i+8])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+2]) && (gameBoard[i+2] === gameBoard[i+4])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 0) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 1) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
     if ((i === 2) && (gameBoard[i] !== '') && (gameBoard[i] === gameBoard[i+3]) && (gameBoard[i+3] === gameBoard[i+6])) {
-      increaseWins();
-      announceWin();
-      disableClicks();
-      return
+      doAfterWin()
     }
   }
 }
+
+function checkDraws() {
+  if (!currentPlayer.winIncreased && checkWinsCounter === 9) {
+    boardHeader.innerHTML = `<h3 class="player-emoji">Hey, it's a draw</h3>`
+    stopGame()
+  }   
+}
+
 function increaseWins() {
   currentPlayer.wins++
   playerOneWins.innerHTML = `<h1 class="wins">${playerOne.wins} Wins</h1>`
@@ -167,4 +137,36 @@ function announceWin(){
 
 function disableClicks() {
   gridBoard.classList.add('disable-click')
+}
+
+function enableClicks() {
+  gridBoard.classList.remove('disable-click')
+}
+
+function stopGame() {
+  setTimeout (function() {
+    gamePlaySection.classList.add('obscure')
+  setTimeout(reset, 1500)
+  }, 2500)
+}
+
+function doAfterWin() {
+  increaseWins();
+  announceWin();
+  disableClicks();
+  stopGame();
+  return
+}
+function reset() {
+  gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
+  currentPlayer.winIncreased = false
+  checkWinsCounter = 0
+
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].innerHTML = ''
+  }
+  gamePlaySection.classList.remove('obscure')
+  
+  togglePlayer()
+  enableClicks()
 }
