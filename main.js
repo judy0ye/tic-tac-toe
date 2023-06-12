@@ -106,11 +106,11 @@ function placeMove(e) {
 
   e.target.innerHTML += `<div class="player-emoji">${currentPlayer.token}</div>` 
   
+  checkWinsCounter++
   checkWins()  
-  if (!currentPlayer.winIncreased) {
+  if (!currentPlayer.winIncreased ) {
     togglePlayer()
   }
-  checkWinsCounter++
   checkDraws() 
 }
 
@@ -146,7 +146,8 @@ function checkWins() {
 function checkDraws() {
   if (!currentPlayer.winIncreased && checkWinsCounter === 9) {
     boardHeader.innerHTML = `<h3 class="player-emoji">Hey, it's a draw</h3>`
-  }  
+    stopGame()
+  }   
 }
 
 function increaseWins() {
@@ -185,12 +186,14 @@ function doAfterWin() {
 }
 function reset() {
   gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
-  
+  currentPlayer.winIncreased = false
+  checkWinsCounter = 0
+
   for (var i = 0; i < boxes.length; i++) {
     boxes[i].innerHTML = ''
   }
   gamePlaySection.classList.remove('obscure')
-  currentPlayer.winIncreased = false
+  
   // if (!currentPlayer.startsFirst) {
   //   togglePlayer()
   // }
