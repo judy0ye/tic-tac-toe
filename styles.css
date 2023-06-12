@@ -87,13 +87,21 @@ body::before {
 } */
      
 .middle-col {
-    border-left: 2px solid black;
-    border-right: 2px solid black 
+    border-left: .3em solid black;
+    border-right: .3em solid black;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    border-bottom-left-radius: 0.2em; 
 }
 
 .middle-row {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black 
+    border-top: .3em solid black;
+    border-bottom: .3em solid black;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;  
 }
 
 /* .player-one-emoji,
