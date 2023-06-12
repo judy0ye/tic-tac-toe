@@ -24,12 +24,12 @@ for (var i = 0; i < boxes.length; i++) {
 }
 
 // functions
-function storePlayerInfo(id, token, startFirst) {
+function storePlayerInfo(id, token, startsFirst) {
   return {
     id: id,
     token: token, 
     // isPlayerTurn: true, 
-    startFirst: startFirst || false,
+    startsFirst: startsFirst || false,
     wins: 0,
     winIncreased: false,
     //disableClick: false,
@@ -49,7 +49,7 @@ function startGame() {
 
 // updates Data Model:
 function createPlayer() {
-  playerOne = storePlayerInfo(1, '🥔')
+  playerOne = storePlayerInfo(1, '🥔', true)
   playerTwo = storePlayerInfo(2, '🍟')
 
   allPlayers.push(playerOne)
@@ -66,6 +66,38 @@ function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
   displayPlayer()
 }
+
+
+
+// function toggleStartsFirst() {
+//   currentPlayer.startsFirst = currentPlayer.startsFirst === playerOne.startsFirst
+//   ? (playerOne.startsFirst === false && playerTwo.startsFirst === true) 
+//   : (playerOne.startsFirst === true && playerTwo.startsFirst === false)
+// }
+
+function toggleStartsFirst() {
+  if (currentPlayer === playerOne && playerOne.startsFirst) {
+    playerOne.startsFirst = false
+    playerTwo.startsFirst = true
+    return
+  }
+  if (currentPlayer === playerOne && !playerOne.startsFirst) {
+    playerOne.startsFirst = true
+    playerTwo.startsFirst = false
+    return
+  }
+  if (currentPlayer === playerTwo && playerTwo.startsFirst) {
+    playerOne.startsFirst = true
+    playerTwo.startsFirst = false
+    return
+  }
+  if (currentPlayer === playerTwo && !playerTwo.startsFirst) {
+    playerOne.startsFirst = false
+    playerTwo.startsFirst = true
+    return
+  }
+}
+
 
 function placeMove(e) {
   var gameBoardIndex = parseInt(e.target.getAttribute('id'))
@@ -167,6 +199,13 @@ function reset() {
   }
   gamePlaySection.classList.remove('obscure')
   
-  togglePlayer()
+  if (currentPlayer.startsFirst) {
+    toggleStartsFirst()
+    togglePlayer()
+  } 
+  else {
+    toggleStartsFirst()
+    displayPlayer() 
+  }
   enableClicks()
 }
