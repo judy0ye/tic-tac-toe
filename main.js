@@ -64,10 +64,21 @@ function displayPlayer() {
 
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
-  displayPlayer()
+  // displayPlayer()
 }
 
-
+function toggleStartsFirst() {
+  if (currentPlayer.startsFirst) {
+    currentPlayer.startsFirst = false
+    togglePlayer()
+    currentPlayer.startsFirst = true
+  } else {
+    currentPlayer.startsFirst = true
+    togglePlayer()
+    currentPlayer.startsFirst = false
+    togglePlayer()
+  }
+}
 
 // function toggleStartsFirst() {
 //   currentPlayer.startsFirst = currentPlayer.startsFirst === playerOne.startsFirst
@@ -75,28 +86,28 @@ function togglePlayer() {
 //   : (playerOne.startsFirst === true && playerTwo.startsFirst === false)
 // }
 
-function toggleStartsFirst() {
-  if (currentPlayer === playerOne && playerOne.startsFirst) {
-    playerOne.startsFirst = false
-    playerTwo.startsFirst = true
-    return
-  }
-  if (currentPlayer === playerOne && !playerOne.startsFirst) {
-    playerOne.startsFirst = true
-    playerTwo.startsFirst = false
-    return
-  }
-  if (currentPlayer === playerTwo && playerTwo.startsFirst) {
-    playerOne.startsFirst = true
-    playerTwo.startsFirst = false
-    return
-  }
-  if (currentPlayer === playerTwo && !playerTwo.startsFirst) {
-    playerOne.startsFirst = false
-    playerTwo.startsFirst = true
-    return
-  }
-}
+// function toggleStartsFirst() {
+//   if (currentPlayer === playerOne && playerOne.startsFirst) {
+//     playerOne.startsFirst = false
+//     playerTwo.startsFirst = true
+//     return
+//   }
+//   if (currentPlayer === playerOne && !playerOne.startsFirst) {
+//     playerOne.startsFirst = true
+//     playerTwo.startsFirst = false
+//     return
+//   }
+//   if (currentPlayer === playerTwo && playerTwo.startsFirst) {
+//     playerOne.startsFirst = true
+//     playerTwo.startsFirst = false
+//     return
+//   }
+//   if (currentPlayer === playerTwo && !playerTwo.startsFirst) {
+//     playerOne.startsFirst = false
+//     playerTwo.startsFirst = true
+//     return
+//   }
+// }
 
 
 function placeMove(e) {
@@ -115,6 +126,7 @@ function placeMove(e) {
   checkWins()  
   if (!currentPlayer.winIncreased && checkWinsCounter < 9) {
     togglePlayer()
+    displayPlayer()
   }
   checkDraws() 
 }
@@ -201,7 +213,7 @@ function reset() {
   
   if (currentPlayer.startsFirst) {
     toggleStartsFirst()
-    togglePlayer()
+    displayPlayer()
   } 
   else {
     toggleStartsFirst()
