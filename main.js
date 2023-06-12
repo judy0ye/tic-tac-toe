@@ -80,11 +80,6 @@ function toggleStartsFirst() {
   }
 }
 
-// function toggleStartsFirst() {
-//   currentPlayer.startsFirst = currentPlayer.startsFirst === playerOne.startsFirst
-//   ? (playerOne.startsFirst === false && playerTwo.startsFirst === true) 
-//   : (playerOne.startsFirst === true && playerTwo.startsFirst === false)
-// }
 
 // function toggleStartsFirst() {
 //   if (currentPlayer === playerOne && playerOne.startsFirst) {
@@ -201,6 +196,7 @@ function doAfterWin() {
   stopGame();
   return
 }
+
 function reset() {
   gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
   currentPlayer.winIncreased = false
@@ -211,13 +207,7 @@ function reset() {
   }
   gamePlaySection.classList.remove('obscure')
   
-  if (currentPlayer.startsFirst) {
-    toggleStartsFirst()
-    displayPlayer()
-  } 
-  else {
-    toggleStartsFirst()
-    displayPlayer() 
-  }
+  toggleStartsFirst()
+  displayPlayer() 
   enableClicks()
 }
