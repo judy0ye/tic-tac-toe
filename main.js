@@ -15,36 +15,13 @@ playerOneWins = document.querySelector('.player-one-wins')
 playerTwoWins = document.querySelector('.player-two-wins')
 
 // eventListeners
-// boxOne.addEventListener('click', addSymbol)
-// boxTwo.addEventListener('click', addSymbol)
-// boxThree.addEventListener('click', addSymbol)
 window.addEventListener('load', startGame)
-
-// for (var i = 0; i < boxes.length; i++) {
-//   boxes[i].addEventListener('click', function (e) {
-//     placeMove(e);
-//   }, {once: true});
-// }
 
 for (var i = 0; i < boxes.length; i++) {
   boxes[i].addEventListener('click', function (e) {
     placeMove(e);
   });
 }
-
-// for (var i = 0; i < boxes.length; i++) {
-//   boxes[i].addEventListener('reset', startGame);
-// }
-
-// for (var i = 0; i < boxes.length; i++) {
-//   boxes[i].addEventListener('click', function removeAfterReset(e) {
-//     placeMove(e);
-//     if(currentPlayer.increaseWins) {
-//       reset()
-//       e.target.removeEventListener('click', removeAfterReset)
-//     }
-//   }, {once: true});
-// }
 
 // functions
 function storePlayerInfo(id, token, startFirst) {
@@ -85,10 +62,6 @@ function displayPlayer() {
   playerTwoWins.innerHTML = `<h1 class="wins">${playerTwo.wins} Wins</h1>`
 }
 
-// function clearPlayerHeader() {
-//   boardHeader.innerHTML = ''
-// }
-
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
   displayPlayer()
@@ -108,7 +81,7 @@ function placeMove(e) {
   
   checkWinsCounter++
   checkWins()  
-  if (!currentPlayer.winIncreased ) {
+  if (!currentPlayer.winIncreased && checkWinsCounter < 9) {
     togglePlayer()
   }
   checkDraws() 
@@ -194,17 +167,6 @@ function reset() {
   }
   gamePlaySection.classList.remove('obscure')
   
-  // if (!currentPlayer.startsFirst) {
-  //   togglePlayer()
-  // }
   togglePlayer()
   enableClicks()
 }
-
-// if currentPlayer didn't start, toggle
-// if fries didn't start, playerTwo.startsFrist = 
-// if currentPlayer.startsFirst = false, toggle player
-// if currentPlayer.startsFrist = true, toggle player
-
-//potato startsFirst = true
-  //potato won, 
