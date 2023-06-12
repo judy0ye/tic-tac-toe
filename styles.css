@@ -1,3 +1,45 @@
+/* FONT */
+/* font-family: 'Poppins', sans-serif; */
+
+/* COLORS */
+/* text color -> ##faebd7 */
+/* text shadow color -> rgb(54 59 71) */
+/* headers background color -> #778899, #808080) */
+
+
+/* HEADER */
+
+.play-section-header, 
+.wins,
+.player-header {
+    margin: .6em;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    font-size: 2.5rem;
+    border-radius: .4em;
+    text-shadow: 6px 3px 9px rgb(54 59 71);
+    color: #faebd7;
+    background-image: linear-gradient(to bottom, #778899, #808080);
+    opacity: .9;
+}
+
+.player-header {
+    font-size: 4rem;
+}
+
+.player-emoji,
+.wins {
+    font-size: 3.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.wins {
+    font-size: 2.5rem
+}
+
+/* GENERAL */
 
 body {
     margin: 0;
@@ -5,9 +47,7 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     display:flex;
-    /* height: 100vh;
-    width: 100vw; */
-    
+    font-family: 'Poppins', sans-serif;    
 }
 
 body::before {
@@ -15,26 +55,23 @@ body::before {
     background-image: url(assets/wouter-supardi-salari-DOtMoKCauyU-unsplash.jpg);
     background-size: cover;
     background-position: center;
-    position:absolute;
+    position: absolute;
     height: 100vh;
     width: 100vw;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: -1;
+    z-index: -1; /* lowers priority of background image */
     opacity: .55;
 }
 
 .player-one, .player-two {
-    /* border: 2px solid white; */
     width: 25vw;
     height: 100vh;
     display: flex;
-    /* justify-content: space-around; */
     flex-direction: column;
     margin-top: 3em;
-    font-family: 'Poppins', sans-serif;
 }
 
 .play-section {
@@ -47,74 +84,49 @@ body::before {
     border-right: 0.3em solid rgb(123, 116, 116)
 }
 
-.play-section-header, 
-.wins,
-.player-header {
-    display: flex;
-    justify-content: space-around;
-    font-size: 2.5rem;
-    /* color:ghostwhite;    */
-}
+/* TIC TAC TOE BOARD */
 
-/* header */
-.player-header {
-    font-size: 5rem
-}
-
-/* tic tac toe board */
 .grid-board {
-    /*
-    grid-template-columns: 10vw 10vw 10vw;
-    grid-template-rows: 15vh 15vh 15vh;
-    margin-top: 35vh; */
-
-    border: 1px solid salmon;
     display: grid;
     grid-template-columns: repeat(3, 15vw);
-    grid-template-rows: repeat(3, 18vh);
+    grid-template-rows: repeat(3, 15vh);
     justify-items: stretch;
     align-items: stretch;
     justify-content: center;
     align-content: center;
-    /* height: 60vh; */
-    /* background-color: whitesmoke;
-    opacity: .65; */
-    /* margin-top: 25vh; */
 }
 
 .box {
-    border: 1px solid black;   
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
      
 .middle-col {
-    border-left: 2px solid black;
-    border-right: 2px solid black 
+    border-left: .3em solid black;
+    border-right: .3em solid black;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    border-bottom-left-radius: 0.2em; 
 }
 
 .middle-row {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black 
+    border-top: .3em solid black;
+    border-bottom: .3em solid black;
+    border-top-left-radius: 0.2em;
+    border-top-right-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;  
 }
 
-/* .player-one-emoji,
-.player-two-emoji  */
-.player-emoji,
-.wins {
-    font-size: 4.5rem;
-    display: flex;
-    justify-content: center;
-}
-
-.wins {
-    font-size: 2.5rem
-}
+/* DOM */
 
 .disable-click {
     pointer-events: none;
-    /* cursor: not-allowed; */
 }
 
 .obscure {
-    /* display: none; */
     opacity: .25;
 }
