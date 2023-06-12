@@ -24,12 +24,12 @@ for (var i = 0; i < boxes.length; i++) {
 }
 
 // functions
-function storePlayerInfo(id, token, startFirst) {
+function storePlayerInfo(id, token, startsFirst) {
   return {
     id: id,
     token: token, 
     // isPlayerTurn: true, 
-    startFirst: startFirst || false,
+    startsFirst: startsFirst || false,
     wins: 0,
     winIncreased: false,
     //disableClick: false,
@@ -46,10 +46,9 @@ function startGame() {
   // checkWins();
 }
 
-
 // updates Data Model:
 function createPlayer() {
-  playerOne = storePlayerInfo(1, '🥔')
+  playerOne = storePlayerInfo(1, '🥔', true)
   playerTwo = storePlayerInfo(2, '🍟')
 
   allPlayers.push(playerOne)
@@ -64,7 +63,20 @@ function displayPlayer() {
 
 function togglePlayer() {
   currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
-  displayPlayer()
+  // displayPlayer()
+}
+
+function toggleWhoStartsFirst() {
+  if (currentPlayer.startsFirst) {
+    currentPlayer.startsFirst = false
+    togglePlayer()
+    currentPlayer.startsFirst = true
+  } else {
+    currentPlayer.startsFirst = true
+    togglePlayer()
+    currentPlayer.startsFirst = false
+    togglePlayer()
+  }
 }
 
 function placeMove(e) {
@@ -83,6 +95,7 @@ function placeMove(e) {
   checkWins()  
   if (!currentPlayer.winIncreased && checkWinsCounter < 9) {
     togglePlayer()
+    displayPlayer()
   }
   checkDraws() 
 }
@@ -157,6 +170,7 @@ function doAfterWin() {
   stopGame();
   return
 }
+
 function reset() {
   gameBoard.splice(0, gameBoard.length, '', '', '', '', '', '', '', '', '')
   currentPlayer.winIncreased = false
@@ -167,6 +181,7 @@ function reset() {
   }
   gamePlaySection.classList.remove('obscure')
   
-  togglePlayer()
+  toggleWhoStartsFirst()
+  displayPlayer() 
   enableClicks()
 }
